@@ -9,10 +9,6 @@
 |__/      |__/ \______/  \_______/|__/  \__/    \_/    |__/ \_______/ \_____/\___/
 ```
 
-<p align="center">
-  <img src="docs/assets/flockview-logo.png" alt="FlockView app icon" width="128" height="128">
-</p>
-
 # FlockView
 
 FlockView is a native macOS scanner console for local Flock camera detection workflows. It can run from the included ESP32 scanner firmware over USB serial, use the Mac's own Wi-Fi and Bluetooth radios, or generate local Test Mode data for demos and UI checks.
