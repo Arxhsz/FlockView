@@ -64,6 +64,7 @@ final class ScannerViewModel: ObservableObject {
     private var clockTask: Task<Void, Never>?
     private var toastTask: Task<Void, Never>?
     private var reconnectTask: Task<Void, Never>?
+    private var streamGeneration = 0
     private var accumulatedSessionDuration: TimeInterval = 0
     private var lastScanStartDate: Date?
     private var hiddenCameraIDs = Set<UUID>()
@@ -215,9 +216,10 @@ final class ScannerViewModel: ObservableObject {
             return
         }
 
-        await transport.disconnect()
+        let previousTransport = transport
         stopStreamTasks()
         reconnectTask?.cancel()
+        await previousTransport.disconnect()
         scannerSource = source
         settings.scannerSource = source
         sessionSource = source.sessionDataSource
@@ -229,8 +231,10 @@ final class ScannerViewModel: ObservableObject {
             acceptsLiveDetections = false
             status = .disconnected
             connectionState = .disconnected
+            resetDiagnosticsForSource(.hardware, selectedDevice: selectedSerialDevice)
             startStreamTasks(for: transport)
             await refreshDevices()
+            resetDiagnosticsForSource(.hardware, selectedDevice: selectedSerialDevice)
             if let device = selectedSerialDevice {
                 await connectToDevice(device)
             }
@@ -239,6 +243,7 @@ final class ScannerViewModel: ObservableObject {
             acceptsLiveDetections = false
             status = .disconnected
             connectionState = .disconnected
+            resetDiagnosticsForSource(.macNative, selectedDevice: .nativeMacScanner)
             startStreamTasks(for: transport)
             do {
                 try await transport.connect(to: .nativeMacScanner)
@@ -609,9 +614,10 @@ final class ScannerViewModel: ObservableObject {
         guard scannerSource != .hardware || transport !== hardwareTransport else {
             return
         }
-        await transport.disconnect()
+        let previousTransport = transport
         stopStreamTasks()
         reconnectTask?.cancel()
+        await previousTransport.disconnect()
         scannerSource = .hardware
         settings.scannerSource = .hardware
         sessionSource = .hardware
@@ -619,55 +625,73 @@ final class ScannerViewModel: ObservableObject {
         transport = hardwareTransport
         status = .disconnected
         connectionState = .disconnected
+        resetDiagnosticsForSource(.hardware, selectedDevice: selectedSerialDevice)
         startStreamTasks(for: transport)
         await refreshDevices()
+        resetDiagnosticsForSource(.hardware, selectedDevice: selectedSerialDevice)
     }
 
     private func startStreamTasks(for transport: ScannerTransport) {
-        observationTask = Task { [weak self] in
+        streamGeneration += 1
+        let generation = streamGeneration
+
+        observationTask = Task { [weak self, weak transport] in
             guard let self else { return }
+            guard let transport else { return }
             for await observation in transport.observationStream {
+                guard isCurrentStream(transport: transport, generation: generation) else { return }
                 handle(observation)
             }
         }
 
-        statusTask = Task { [weak self] in
+        statusTask = Task { [weak self, weak transport] in
             guard let self else { return }
+            guard let transport else { return }
             for await nextStatus in transport.statusStream {
+                guard isCurrentStream(transport: transport, generation: generation) else { return }
                 apply(nextStatus)
             }
         }
 
-        connectionTask = Task { [weak self] in
+        connectionTask = Task { [weak self, weak transport] in
             guard let self else { return }
+            guard let transport else { return }
             for await nextState in transport.connectionStream {
+                guard isCurrentStream(transport: transport, generation: generation) else { return }
                 apply(nextState)
             }
         }
 
-        responseTask = Task { [weak self] in
+        responseTask = Task { [weak self, weak transport] in
             guard let self else { return }
+            guard let transport else { return }
             for await response in transport.responseStream {
+                guard isCurrentStream(transport: transport, generation: generation) else { return }
                 diagnostics.append(DiagnosticEvent(date: Date(), kind: "response", summary: "\(response.command): \(response.ok)", raw: nil))
             }
         }
 
-        errorTask = Task { [weak self] in
+        errorTask = Task { [weak self, weak transport] in
             guard let self else { return }
+            guard let transport else { return }
             for await error in transport.errorStream {
+                guard isCurrentStream(transport: transport, generation: generation) else { return }
                 handle(error)
             }
         }
 
-        diagnosticsTask = Task { [weak self] in
+        diagnosticsTask = Task { [weak self, weak transport] in
             guard let self else { return }
+            guard let transport else { return }
             for await nextDiagnostics in transport.diagnosticsStream {
+                guard isCurrentStream(transport: transport, generation: generation) else { return }
                 diagnostics = nextDiagnostics
             }
         }
     }
 
     private func stopStreamTasks() {
+        streamGeneration += 1
         observationTask?.cancel()
         statusTask?.cancel()
         connectionTask?.cancel()
@@ -680,6 +704,34 @@ final class ScannerViewModel: ObservableObject {
         responseTask = nil
         errorTask = nil
         diagnosticsTask = nil
+    }
+
+    private func isCurrentStream(transport streamTransport: ScannerTransport, generation: Int) -> Bool {
+        generation == streamGeneration && streamTransport === transport
+    }
+
+    private func resetDiagnosticsForSource(_ source: ScannerSource, selectedDevice: SerialDevice?) {
+        switch source {
+        case .hardware:
+            diagnostics = ScannerDiagnostics(
+                connectionStateDescription: connectionState.visibleStatus,
+                selectedDevice: selectedDevice?.isHardwareSerialPort == true ? selectedDevice : nil,
+                baudRate: 115200
+            )
+        case .macNative:
+            diagnostics = ScannerDiagnostics(
+                connectionStateDescription: connectionState.visibleStatus,
+                selectedDevice: .nativeMacScanner,
+                baudRate: 0,
+                firmwareVersion: "macOS-native",
+                board: ProcessInfo.processInfo.operatingSystemVersionString,
+                schemaVersion: 1
+            )
+        case .test:
+            diagnostics = ScannerDiagnostics(connectionStateDescription: "Test Mode", baudRate: 0, firmwareVersion: "test", board: "mock")
+        case .recorded:
+            diagnostics = ScannerDiagnostics(connectionStateDescription: "Recorded", baudRate: 0)
+        }
     }
 
     private func startClock() {
