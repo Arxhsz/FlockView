@@ -841,7 +841,7 @@ final class ScannerViewModel: ObservableObject {
             firmwareUptimeAtConnection = lastSeenFirmwareUptime ?? 0
             lastConnectionError = nil
             if !wasConnected {
-            showToastOnce(scannerSource == .macNative ? "Mac Scanner connected" : "ESP32 connected", symbolName: scannerSource == .macNative ? "macbook.and.iphone" : "cpu")
+                showToastOnce(scannerSource == .macNative ? "Mac Scanner connected" : "ESP32 connected", symbolName: scannerSource == .macNative ? "macbook.and.iphone" : "cpu")
             }
             wasConnectionEstablished = true
         case .disconnected:
