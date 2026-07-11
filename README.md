@@ -93,6 +93,24 @@ Download the official v1.0 release from [GitHub Releases](https://github.com/Arx
 
 Open `FlockView-macOS.dmg`, then drag `FlockView.app` into `Applications`.
 
+## Flash The ESP32 From The Web
+
+Use the browser flasher at [arxhsz.github.io/FlockView](https://arxhsz.github.io/FlockView/) to install the official FlockViewScanner firmware on an ESP32-WROOM-32 board.
+
+Requirements:
+
+- Chrome, Edge, or another Chromium browser with Web Serial support.
+- ESP32-WROOM-32 development board.
+- Data-capable USB cable.
+
+The direct firmware application binary is also included at [`docs/firmware/flockview-scanner-v1.0.0.bin`](docs/firmware/flockview-scanner-v1.0.0.bin). The web flasher uses the full ESP32 image set:
+
+```text
+docs/firmware/bootloader.bin
+docs/firmware/partitions.bin
+docs/firmware/flockview-scanner-v1.0.0.bin
+```
+
 To create the release package locally:
 
 ```bash
@@ -197,7 +215,7 @@ Disable Auto-Reconnect from the ESP32 menu or Settings, unplug and reconnect the
 FlockView/         macOS SwiftUI app
 FlockViewScanner/  ESP32 PlatformIO firmware
 FlockViewTests/    XCTest coverage
-docs/assets/       README images from the real running app
+docs/              GitHub Pages web flasher, firmware binaries, README images
 scripts/           Release packaging tools
 ```
 

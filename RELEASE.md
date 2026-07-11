@@ -6,6 +6,8 @@ FlockView v1.0.0 is the official first release of the native macOS scanner conso
 
 - Native SwiftUI macOS app.
 - Passive ESP32-WROOM-32 scanner firmware in `FlockViewScanner/`.
+- Web flasher for ESP32 firmware at `https://arxhsz.github.io/FlockView/`.
+- Direct firmware binary at `docs/firmware/flockview-scanner-v1.0.0.bin`.
 - Hardware Mode for the ESP32 scanner firmware.
 - Mac Scanner mode using CoreWLAN and CoreBluetooth.
 - Test Mode with local synthetic detections for demos and validation.
@@ -27,6 +29,20 @@ Vendor identification may use public/static OUI data, advertised names, manufact
 Download `FlockView-macOS.dmg`, open it, then drag `FlockView.app` into `Applications`.
 
 The ZIP asset is included as a plain app bundle archive for users who prefer a direct download.
+
+## Firmware
+
+Flash the ESP32 scanner from the browser at:
+
+```text
+https://arxhsz.github.io/FlockView/
+```
+
+The firmware application binary is included in the repository at:
+
+```text
+docs/firmware/flockview-scanner-v1.0.0.bin
+```
 
 ## Build The Installer Locally
 

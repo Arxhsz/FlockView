@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <title>FlockView Web Flasher</title>
+    <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+    <style>
+      :root {
+        color: #f5f7fb;
+        background: #090b0f;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background:
+          radial-gradient(circle at 15% 10%, rgba(51, 120, 255, 0.14), transparent 34rem),
+          radial-gradient(circle at 90% 20%, rgba(61, 220, 151, 0.12), transparent 28rem),
+          #090b0f;
+      }
+
+      main {
+        width: min(960px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 56px 0;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 40px;
+      }
+
+      .logo {
+        width: 74px;
+        height: 74px;
+        border-radius: 18px;
+        box-shadow: 0 18px 54px rgba(0, 0, 0, 0.42);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.2rem, 5vw, 4.6rem);
+        line-height: 0.95;
+        letter-spacing: 0;
+      }
+
+      .subtitle {
+        max-width: 720px;
+        margin: 18px 0 0;
+        color: #aeb6c7;
+        font-size: 1.05rem;
+        line-height: 1.65;
+      }
+
+      .panel {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        background: rgba(15, 18, 24, 0.78);
+        box-shadow: 0 28px 88px rgba(0, 0, 0, 0.36);
+        padding: 28px;
+      }
+
+      .install {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 24px;
+        align-items: center;
+      }
+
+      h2 {
+        margin: 0 0 10px;
+        font-size: 1.35rem;
+        letter-spacing: 0;
+      }
+
+      p {
+        margin: 0;
+        color: #aeb6c7;
+        line-height: 1.6;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 20px;
+      }
+
+      .step {
+        min-height: 142px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.035);
+        padding: 18px;
+      }
+
+      .num {
+        display: grid;
+        width: 30px;
+        height: 30px;
+        margin-bottom: 14px;
+        place-items: center;
+        border-radius: 999px;
+        background: #46d369;
+        color: #061008;
+        font-weight: 800;
+      }
+
+      .step strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .pill {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 999px;
+        color: #d8deea;
+        background: rgba(255, 255, 255, 0.045);
+        padding: 8px 12px;
+        font-size: 0.92rem;
+      }
+
+      .links {
+        margin-top: 26px;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      a {
+        color: #78a8ff;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      footer {
+        margin-top: 34px;
+        color: #788298;
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 760px) {
+        main {
+          padding: 32px 0;
+        }
+
+        header,
+        .install {
+          grid-template-columns: 1fr;
+        }
+
+        header {
+          align-items: flex-start;
+        }
+
+        .steps {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <img class="logo" src="assets/flockview-logo.png" alt="FlockView logo">
+        <div>
+          <h1>FlockView Web Flasher</h1>
+          <p class="subtitle">Flash the official FlockViewScanner v1.0.0 firmware to an ESP32-WROOM-32 development board from a Chromium-based browser using Web Serial.</p>
+        </div>
+      </header>
+
+      <section class="panel install" aria-label="Firmware installer">
+        <div>
+          <h2>Install Firmware</h2>
+          <p>Connect the ESP32 over USB, hold BOOT if your board requires it, then choose the serial port and install the firmware.</p>
+        </div>
+        <esp-web-install-button manifest="manifest.json"></esp-web-install-button>
+      </section>
+
+      <section class="steps" aria-label="Flashing steps">
+        <article class="step">
+          <span class="num">1</span>
+          <strong>Use Chrome or Edge</strong>
+          <p>Web Serial is required. Safari and Firefox do not expose the needed serial flashing API.</p>
+        </article>
+        <article class="step">
+          <span class="num">2</span>
+          <strong>Plug in the ESP32</strong>
+          <p>Use a data-capable USB cable and close PlatformIO Serial Monitor or any other app using the port.</p>
+        </article>
+        <article class="step">
+          <span class="num">3</span>
+          <strong>Connect in FlockView</strong>
+          <p>After flashing, open the Mac app and use Hardware Mode to connect at 115200 baud.</p>
+        </article>
+      </section>
+
+      <div class="meta" aria-label="Firmware details">
+        <span class="pill">Firmware: FlockViewScanner v1.0.0</span>
+        <span class="pill">Board: ESP32-WROOM-32 / esp32dev</span>
+        <span class="pill">Baud: 115200</span>
+        <span class="pill">Mode: passive Wi-Fi + BLE scanner</span>
+      </div>
+
+      <div class="links">
+        <a href="firmware/flockview-scanner-v1.0.0.bin">Download firmware .bin</a>
+        <a href="manifest.json">View manifest</a>
+        <a href="https://github.com/Arxhsz/FlockView">GitHub repo</a>
+      </div>
+
+      <footer>Made by <a href="https://github.com/Arxhsz">arxhsz</a>.</footer>
+    </main>
+  </body>
+</html>
