@@ -2,6 +2,74 @@ import XCTest
 @testable import FlockView
 
 final class ScannerBehaviorTests: XCTestCase {
+    func testHardwareSelectionReplacesMacScannerPseudoDevice() {
+        let esp32 = SerialDevice(
+            id: "usbserial-1420",
+            path: "/dev/cu.usbserial-1420",
+            displayName: "USB Serial",
+            vendorID: nil,
+            productID: nil,
+            serialNumber: "1420",
+            usbManufacturer: "FTDI or USB Serial",
+            usbProduct: "USB Serial"
+        )
+
+        let selected = ScannerViewModel.resolvedHardwareSelection(
+            current: .nativeMacScanner,
+            availableDevices: [esp32]
+        )
+
+        XCTAssertEqual(selected, esp32)
+        XCTAssertTrue(selected?.isHardwareSerialPort == true)
+    }
+
+    func testHardwareSelectionReplacesUnavailableSerialDevice() {
+        let stale = SerialDevice(
+            id: "cu.SLAB_USBtoUART",
+            path: "/dev/cu.SLAB_USBtoUART",
+            displayName: "Silicon Labs CP210x",
+            serialNumber: "old"
+        )
+        let current = SerialDevice(
+            id: "cu.wchusbserial1420",
+            path: "/dev/cu.wchusbserial1420",
+            displayName: "CH340/CH341 USB Serial",
+            serialNumber: "1420",
+            usbManufacturer: "WCH",
+            usbProduct: "CH340/CH341 USB-UART"
+        )
+
+        let selected = ScannerViewModel.resolvedHardwareSelection(
+            current: stale,
+            availableDevices: [current]
+        )
+
+        XCTAssertEqual(selected, current)
+    }
+
+    func testHardwareSelectionKeepsAvailableCurrentSerialDevice() {
+        let current = SerialDevice(
+            id: "cu.SLAB_USBtoUART",
+            path: "/dev/cu.SLAB_USBtoUART",
+            displayName: "Silicon Labs CP210x",
+            serialNumber: "keep",
+            usbManufacturer: "Silicon Labs",
+            usbProduct: "CP210x USB-UART"
+        )
+        let other = SerialDevice(
+            id: "cu.usbmodem1101",
+            path: "/dev/cu.usbmodem1101",
+            displayName: "USB Modem"
+        )
+
+        let selected = ScannerViewModel.resolvedHardwareSelection(
+            current: current,
+            availableDevices: [other, current]
+        )
+
+        XCTAssertEqual(selected, current)
+    }
+
     @MainActor
     func testCameraExpirationRetainsSessionMetadata() async throws {
         let settings = AppSettings()

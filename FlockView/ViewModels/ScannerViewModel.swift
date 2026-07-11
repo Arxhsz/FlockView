@@ -184,9 +184,25 @@ final class ScannerViewModel: ObservableObject {
 
     func refreshDevices() async {
         availableSerialDevices = await hardwareTransport.availableDevices()
-        if selectedSerialDevice == nil {
-            selectedSerialDevice = availableSerialDevices.first(where: \.isLikelyESP32) ?? availableSerialDevices.first
+        selectedSerialDevice = Self.resolvedHardwareSelection(
+            current: selectedSerialDevice,
+            availableDevices: availableSerialDevices
+        )
+    }
+
+    nonisolated static func resolvedHardwareSelection(
+        current: SerialDevice?,
+        availableDevices: [SerialDevice]
+    ) -> SerialDevice? {
+        if
+            let current,
+            current.isHardwareSerialPort,
+            availableDevices.contains(where: { $0.matchesHardwareIdentity(of: current) })
+        {
+            return current
         }
+
+        return availableDevices.first(where: \.isLikelyESP32) ?? availableDevices.first
     }
 
     func select(_ camera: CameraDetection) {
@@ -258,11 +274,28 @@ final class ScannerViewModel: ObservableObject {
 
     func connectToDevice(_ device: SerialDevice, isAutoReconnect: Bool = false) async {
         await switchToHardwareTransportIfNeeded()
-        selectedSerialDevice = device
+
+        let targetDevice: SerialDevice
+        if device.isHardwareSerialPort {
+            targetDevice = device
+        } else {
+            await refreshDevices()
+            guard let replacement = selectedSerialDevice, replacement.isHardwareSerialPort else {
+                lastConnectionError = "Select an ESP32 serial device before connecting."
+                connectionState = .failed(message: lastConnectionError ?? "Connection failed")
+                if !isAutoReconnect {
+                    showToast(lastConnectionError ?? "Connection failed", symbolName: "exclamationmark.triangle")
+                }
+                return
+            }
+            targetDevice = replacement
+        }
+
+        selectedSerialDevice = targetDevice
         lastConnectionError = nil
         do {
-            try await hardwareTransport.connect(to: device)
-            persistence.save(device: device)
+            try await hardwareTransport.connect(to: targetDevice)
+            persistence.save(device: targetDevice)
             resetUptimeMapping()
         } catch {
             lastConnectionError = (error as? LocalizedError)?.errorDescription ?? error.localizedDescription
@@ -800,7 +833,9 @@ final class ScannerViewModel: ObservableObject {
         diagnostics.connectionStateDescription = state.visibleStatus
         switch state {
         case .connected(let device, let capabilities):
-            selectedSerialDevice = device
+            if scannerSource == .hardware, device.isHardwareSerialPort {
+                selectedSerialDevice = device
+            }
             status.firmwareVersion = capabilities.firmwareVersion
             hostConnectionDate = Date()
             firmwareUptimeAtConnection = lastSeenFirmwareUptime ?? 0
@@ -1185,4 +1220,11 @@ private extension ScannerSource {
 private extension SerialDevice {
     static let testDevice = SerialDevice(id: "test", path: "test://local", displayName: "Test Scanner")
     static let recordedDevice = SerialDevice(id: "recorded", path: "recorded://fixture", displayName: "Recorded Fixture")
+
+    func matchesHardwareIdentity(of other: SerialDevice) -> Bool {
+        if let serialNumber, let otherSerialNumber = other.serialNumber, !serialNumber.isEmpty {
+            return serialNumber == otherSerialNumber
+        }
+        return id == other.id || path == other.path
+    }
 }

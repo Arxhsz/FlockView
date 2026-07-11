@@ -79,6 +79,10 @@ struct SerialDevice: Identifiable, Hashable, Codable, Sendable {
             haystack.contains($0)
         }
     }
+
+    var isHardwareSerialPort: Bool {
+        path.hasPrefix("/dev/cu.") || path.hasPrefix("/dev/tty.")
+    }
 }
 
 extension SerialDevice {
