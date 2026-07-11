@@ -15,6 +15,10 @@ FlockView is a native macOS application and ESP32-based passive wireless scanner
 
 No Electron. No browser serial API. No backend. No cloud account.
 
+## FlockView macOS App
+
+![FlockView macOS scanner dashboard](docs/assets/flockview-main.png)
+
 ## Features
 
 - Native SwiftUI macOS scanner dashboard.
@@ -33,20 +37,6 @@ No Electron. No browser serial API. No backend. No cloud account.
 FlockView accepts observations from the included ESP32 scanner or from supported native macOS scanning APIs. Observations are normalized, classified, grouped into device records, and displayed only when they meet the configured matching criteria.
 
 The project is designed around passive observation. FlockView does not connect to, interfere with, impersonate, jam, or modify detected devices.
-
-## FlockView macOS App
-
-### Scanner Dashboard
-
-![FlockView Scanner Dashboard](docs/assets/flockview-main.png)
-
-### Settings
-
-![FlockView Settings](docs/assets/flockview-settings.png)
-
-### Diagnostics
-
-![FlockView Diagnostics](docs/assets/flockview-diagnostics.png)
 
 ## ESP32 Scanner
 
@@ -121,8 +111,6 @@ Command-line tests:
 xcodebuild test -project FlockView.xcodeproj -scheme FlockView -configuration Debug -destination 'platform=macOS'
 ```
 
-Use a normally signed local build when testing macOS notifications. A compile-only unsigned build can launch, but macOS may not list it correctly in System Settings > Notifications.
-
 ## Building the ESP32 Firmware
 
 From `FlockViewScanner/`:
@@ -172,7 +160,7 @@ FlockView/
 ├── FlockViewScanner/   # Maintained ESP32 scanner firmware
 ├── FlockViewTests/     # XCTest coverage
 ├── docs/
-│   └── assets/         # Screenshots from the macOS application
+│   └── assets/         # macOS application screenshot
 ├── scripts/            # Release packaging tools
 ├── README.md
 └── RELEASE.md
