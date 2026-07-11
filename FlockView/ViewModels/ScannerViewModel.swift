@@ -667,6 +667,7 @@ final class ScannerViewModel: ObservableObject {
             guard let transport else { return }
             for await response in transport.responseStream {
                 guard isCurrentStream(transport: transport, generation: generation) else { return }
+                recoverHardwareConnectionIfNeeded(after: response)
                 diagnostics.append(DiagnosticEvent(date: Date(), kind: "response", summary: "\(response.command): \(response.ok)", raw: nil))
             }
         }
@@ -732,6 +733,38 @@ final class ScannerViewModel: ObservableObject {
         case .recorded:
             diagnostics = ScannerDiagnostics(connectionStateDescription: "Recorded", baudRate: 0)
         }
+    }
+
+    private func recoverHardwareConnectionIfNeeded(after response: ScannerCommandResponse) {
+        guard
+            response.ok,
+            scannerSource == .hardware,
+            !connectionState.isConnected,
+            let device = selectedSerialDevice,
+            device.isHardwareSerialPort
+        else {
+            return
+        }
+
+        let capabilities = connectionState.capabilities ?? ScannerCapabilities(
+            firmware: "FlockViewScanner",
+            firmwareVersion: status.firmwareVersion ?? diagnostics.firmwareVersion ?? "Unknown",
+            board: diagnostics.board ?? "esp32-wroom-32",
+            passiveOnly: true,
+            wifiBands: ["2.4GHz"],
+            bleSupported: true
+        )
+        connectionState = .connected(device, capabilities)
+        diagnostics.connectionStateDescription = connectionState.visibleStatus
+        diagnostics.selectedDevice = device
+        if diagnostics.firmwareVersion == nil {
+            diagnostics.firmwareVersion = capabilities.firmwareVersion
+        }
+        if diagnostics.board == nil {
+            diagnostics.board = capabilities.board
+        }
+        lastConnectionError = nil
+        wasConnectionEstablished = true
     }
 
     private func startClock() {
