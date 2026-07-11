@@ -1,0 +1,653 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		000000000000000000010001 /* FlockViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020001 /* FlockViewApp.swift */; };
+		000000000000000000010002 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020002 /* AppSettings.swift */; };
+		000000000000000000010003 /* CameraDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020003 /* CameraDetection.swift */; };
+		000000000000000000010004 /* ScannerObservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020004 /* ScannerObservation.swift */; };
+		000000000000000000010005 /* ScannerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020005 /* ScannerStatus.swift */; };
+		000000000000000000010006 /* ClipboardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020006 /* ClipboardService.swift */; };
+		000000000000000000010007 /* ExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020007 /* ExportService.swift */; };
+		000000000000000000010008 /* MockScannerTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020008 /* MockScannerTransport.swift */; };
+		000000000000000000010009 /* ScannerTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020009 /* ScannerTransport.swift */; };
+		00000000000000000001000A /* ScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000002000A /* ScannerViewModel.swift */; };
+		00000000000000000001000B /* BottomStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000002000B /* BottomStatusBar.swift */; };
+		00000000000000000001000C /* CameraDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000002000C /* CameraDetailView.swift */; };
+		00000000000000000001000D /* CameraListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000002000D /* CameraListView.swift */; };
+		00000000000000000001000E /* CameraRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000002000E /* CameraRowView.swift */; };
+		00000000000000000001000F /* FlockTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000002000F /* FlockTheme.swift */; };
+		000000000000000000010010 /* NoteEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020010 /* NoteEditorView.swift */; };
+		000000000000000000010011 /* RSSIChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020011 /* RSSIChartView.swift */; };
+		000000000000000000010012 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020012 /* RootView.swift */; };
+		000000000000000000010013 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020013 /* SettingsView.swift */; };
+		000000000000000000010014 /* SignalBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020014 /* SignalBarsView.swift */; };
+		000000000000000000010015 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020015 /* ToastView.swift */; };
+		000000000000000000010016 /* TopStatusBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020016 /* TopStatusBar.swift */; };
+		000000000000000000010017 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020017 /* Assets.xcassets */; };
+		000000000000000000010018 /* ScannerDiagnostics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000002001A /* ScannerDiagnostics.swift */; };
+		000000000000000000010019 /* SerialPortDiscoveryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000002001B /* SerialPortDiscoveryService.swift */; };
+		00000000000000000001001A /* SerialScannerTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000002001C /* SerialScannerTransport.swift */; };
+		00000000000000000001001B /* RecordedScannerTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000002001D /* RecordedScannerTransport.swift */; };
+		00000000000000000001001C /* ConnectionPersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000002001E /* ConnectionPersistenceService.swift */; };
+		00000000000000000001001D /* ScannerCommandService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000002001F /* ScannerCommandService.swift */; };
+		00000000000000000001001E /* SerialLineDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020020 /* SerialLineDecoder.swift */; };
+		00000000000000000001001F /* ScannerEventDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020021 /* ScannerEventDecoder.swift */; };
+		000000000000000000010020 /* DiagnosticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020022 /* DiagnosticsView.swift */; };
+		000000000000000000010021 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020023 /* NotificationService.swift */; };
+		000000000000000000010022 /* FlockSignatureDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020024 /* FlockSignatureDatabase.swift */; };
+		000000000000000000010023 /* NativeMacScannerTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000020025 /* NativeMacScannerTransport.swift */; };
+		000000000000000000090001 /* ScannerIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000090002 /* ScannerIntegrationTests.swift */; };
+		000000000000000000090010 /* ScannerBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000090011 /* ScannerBehaviorTests.swift */; };
+		000000000000000000090012 /* NativeScannerClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000000000000000000090013 /* NativeScannerClassifierTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		000000000000000000090009 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 000000000000000000060001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 000000000000000000050001;
+			remoteInfo = FlockView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		000000000000000000020001 /* FlockViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlockViewApp.swift; sourceTree = "<group>"; };
+		000000000000000000020002 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		000000000000000000020003 /* CameraDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraDetection.swift; sourceTree = "<group>"; };
+		000000000000000000020004 /* ScannerObservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerObservation.swift; sourceTree = "<group>"; };
+		000000000000000000020005 /* ScannerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerStatus.swift; sourceTree = "<group>"; };
+		000000000000000000020006 /* ClipboardService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardService.swift; sourceTree = "<group>"; };
+		000000000000000000020007 /* ExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportService.swift; sourceTree = "<group>"; };
+		000000000000000000020008 /* MockScannerTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockScannerTransport.swift; sourceTree = "<group>"; };
+		000000000000000000020009 /* ScannerTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTransport.swift; sourceTree = "<group>"; };
+		00000000000000000002000A /* ScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewModel.swift; sourceTree = "<group>"; };
+		00000000000000000002000B /* BottomStatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomStatusBar.swift; sourceTree = "<group>"; };
+		00000000000000000002000C /* CameraDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraDetailView.swift; sourceTree = "<group>"; };
+		00000000000000000002000D /* CameraListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraListView.swift; sourceTree = "<group>"; };
+		00000000000000000002000E /* CameraRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraRowView.swift; sourceTree = "<group>"; };
+		00000000000000000002000F /* FlockTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlockTheme.swift; sourceTree = "<group>"; };
+		000000000000000000020010 /* NoteEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteEditorView.swift; sourceTree = "<group>"; };
+		000000000000000000020011 /* RSSIChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSIChartView.swift; sourceTree = "<group>"; };
+		000000000000000000020012 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		000000000000000000020013 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		000000000000000000020014 /* SignalBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalBarsView.swift; sourceTree = "<group>"; };
+		000000000000000000020015 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		000000000000000000020016 /* TopStatusBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopStatusBar.swift; sourceTree = "<group>"; };
+		000000000000000000020017 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		000000000000000000020018 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		000000000000000000020019 /* FlockView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlockView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		00000000000000000002001A /* ScannerDiagnostics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerDiagnostics.swift; sourceTree = "<group>"; };
+		00000000000000000002001B /* SerialPortDiscoveryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialPortDiscoveryService.swift; sourceTree = "<group>"; };
+		00000000000000000002001C /* SerialScannerTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialScannerTransport.swift; sourceTree = "<group>"; };
+		00000000000000000002001D /* RecordedScannerTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordedScannerTransport.swift; sourceTree = "<group>"; };
+		00000000000000000002001E /* ConnectionPersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionPersistenceService.swift; sourceTree = "<group>"; };
+		00000000000000000002001F /* ScannerCommandService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerCommandService.swift; sourceTree = "<group>"; };
+		000000000000000000020020 /* SerialLineDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialLineDecoder.swift; sourceTree = "<group>"; };
+		000000000000000000020021 /* ScannerEventDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerEventDecoder.swift; sourceTree = "<group>"; };
+		000000000000000000020022 /* DiagnosticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticsView.swift; sourceTree = "<group>"; };
+		000000000000000000020023 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		000000000000000000020024 /* FlockSignatureDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlockSignatureDatabase.swift; sourceTree = "<group>"; };
+		000000000000000000020025 /* NativeMacScannerTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeMacScannerTransport.swift; sourceTree = "<group>"; };
+		000000000000000000090002 /* ScannerIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerIntegrationTests.swift; sourceTree = "<group>"; };
+		000000000000000000090011 /* ScannerBehaviorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerBehaviorTests.swift; sourceTree = "<group>"; };
+		000000000000000000090013 /* NativeScannerClassifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeScannerClassifierTests.swift; sourceTree = "<group>"; };
+		000000000000000000090003 /* FlockViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlockViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		000000000000000000030001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000000000000000000090005 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		000000000000000000040001 = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000040002 /* FlockView */,
+				000000000000000000090004 /* FlockViewTests */,
+				000000000000000000020018 /* README.md */,
+				000000000000000000040008 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		000000000000000000040002 /* FlockView */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000020001 /* FlockViewApp.swift */,
+				000000000000000000040003 /* Models */,
+				000000000000000000040004 /* Services */,
+				000000000000000000040005 /* ViewModels */,
+				000000000000000000040006 /* Views */,
+				000000000000000000020017 /* Assets.xcassets */,
+			);
+			path = FlockView;
+			sourceTree = "<group>";
+		};
+		000000000000000000040003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000020003 /* CameraDetection.swift */,
+				000000000000000000020004 /* ScannerObservation.swift */,
+				000000000000000000020005 /* ScannerStatus.swift */,
+				00000000000000000002001A /* ScannerDiagnostics.swift */,
+				000000000000000000020002 /* AppSettings.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		000000000000000000040004 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000020009 /* ScannerTransport.swift */,
+				000000000000000000020024 /* FlockSignatureDatabase.swift */,
+				000000000000000000020025 /* NativeMacScannerTransport.swift */,
+				000000000000000000020008 /* MockScannerTransport.swift */,
+				00000000000000000002001C /* SerialScannerTransport.swift */,
+				00000000000000000002001B /* SerialPortDiscoveryService.swift */,
+				000000000000000000020020 /* SerialLineDecoder.swift */,
+				000000000000000000020021 /* ScannerEventDecoder.swift */,
+				00000000000000000002001F /* ScannerCommandService.swift */,
+				00000000000000000002001E /* ConnectionPersistenceService.swift */,
+				00000000000000000002001D /* RecordedScannerTransport.swift */,
+				000000000000000000020007 /* ExportService.swift */,
+				000000000000000000020006 /* ClipboardService.swift */,
+				000000000000000000020023 /* NotificationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		000000000000000000040005 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000002000A /* ScannerViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		000000000000000000040006 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000020012 /* RootView.swift */,
+				000000000000000000020016 /* TopStatusBar.swift */,
+				00000000000000000002000D /* CameraListView.swift */,
+				00000000000000000002000E /* CameraRowView.swift */,
+				00000000000000000002000C /* CameraDetailView.swift */,
+				000000000000000000020014 /* SignalBarsView.swift */,
+				000000000000000000020011 /* RSSIChartView.swift */,
+				00000000000000000002000B /* BottomStatusBar.swift */,
+				000000000000000000020013 /* SettingsView.swift */,
+				000000000000000000020022 /* DiagnosticsView.swift */,
+				000000000000000000020010 /* NoteEditorView.swift */,
+				000000000000000000020015 /* ToastView.swift */,
+				00000000000000000002000F /* FlockTheme.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		000000000000000000040008 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000020019 /* FlockView.app */,
+				000000000000000000090003 /* FlockViewTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		000000000000000000090004 /* FlockViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				000000000000000000090002 /* ScannerIntegrationTests.swift */,
+				000000000000000000090011 /* ScannerBehaviorTests.swift */,
+				000000000000000000090013 /* NativeScannerClassifierTests.swift */,
+			);
+			path = FlockViewTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		000000000000000000050001 /* FlockView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 000000000000000000080002 /* Build configuration list for PBXNativeTarget "FlockView" */;
+			buildPhases = (
+				000000000000000000030002 /* Sources */,
+				000000000000000000030001 /* Frameworks */,
+				000000000000000000030003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FlockView;
+			productName = FlockView;
+			productReference = 000000000000000000020019 /* FlockView.app */;
+			productType = "com.apple.product-type.application";
+		};
+		000000000000000000090008 /* FlockViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00000000000000000009000D /* Build configuration list for PBXNativeTarget "FlockViewTests" */;
+			buildPhases = (
+				000000000000000000090006 /* Sources */,
+				000000000000000000090005 /* Frameworks */,
+				000000000000000000090007 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				00000000000000000009000A /* PBXTargetDependency */,
+			);
+			name = FlockViewTests;
+			productName = FlockViewTests;
+			productReference = 000000000000000000090003 /* FlockViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		000000000000000000060001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					000000000000000000050001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					000000000000000000090008 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 000000000000000000050001;
+					};
+				};
+			};
+			buildConfigurationList = 000000000000000000080001 /* Build configuration list for PBXProject "FlockView" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 000000000000000000040001;
+			productRefGroup = 000000000000000000040008 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				000000000000000000050001 /* FlockView */,
+				000000000000000000090008 /* FlockViewTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		000000000000000000030003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000010017 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000000000000000000090007 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		000000000000000000030002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000010001 /* FlockViewApp.swift in Sources */,
+				000000000000000000010002 /* AppSettings.swift in Sources */,
+				000000000000000000010003 /* CameraDetection.swift in Sources */,
+				000000000000000000010004 /* ScannerObservation.swift in Sources */,
+				000000000000000000010005 /* ScannerStatus.swift in Sources */,
+				000000000000000000010006 /* ClipboardService.swift in Sources */,
+				000000000000000000010007 /* ExportService.swift in Sources */,
+				000000000000000000010008 /* MockScannerTransport.swift in Sources */,
+				000000000000000000010009 /* ScannerTransport.swift in Sources */,
+				000000000000000000010022 /* FlockSignatureDatabase.swift in Sources */,
+				000000000000000000010023 /* NativeMacScannerTransport.swift in Sources */,
+				00000000000000000001000A /* ScannerViewModel.swift in Sources */,
+				00000000000000000001000B /* BottomStatusBar.swift in Sources */,
+				00000000000000000001000C /* CameraDetailView.swift in Sources */,
+				00000000000000000001000D /* CameraListView.swift in Sources */,
+				00000000000000000001000E /* CameraRowView.swift in Sources */,
+				00000000000000000001000F /* FlockTheme.swift in Sources */,
+				000000000000000000010010 /* NoteEditorView.swift in Sources */,
+				000000000000000000010011 /* RSSIChartView.swift in Sources */,
+				000000000000000000010012 /* RootView.swift in Sources */,
+				000000000000000000010013 /* SettingsView.swift in Sources */,
+				000000000000000000010014 /* SignalBarsView.swift in Sources */,
+				000000000000000000010015 /* ToastView.swift in Sources */,
+				000000000000000000010016 /* TopStatusBar.swift in Sources */,
+				000000000000000000010018 /* ScannerDiagnostics.swift in Sources */,
+				000000000000000000010019 /* SerialPortDiscoveryService.swift in Sources */,
+				00000000000000000001001A /* SerialScannerTransport.swift in Sources */,
+				00000000000000000001001B /* RecordedScannerTransport.swift in Sources */,
+				00000000000000000001001C /* ConnectionPersistenceService.swift in Sources */,
+				00000000000000000001001D /* ScannerCommandService.swift in Sources */,
+				00000000000000000001001E /* SerialLineDecoder.swift in Sources */,
+				00000000000000000001001F /* ScannerEventDecoder.swift in Sources */,
+				000000000000000000010020 /* DiagnosticsView.swift in Sources */,
+				000000000000000000010021 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		000000000000000000090006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				000000000000000000090001 /* ScannerIntegrationTests.swift in Sources */,
+				000000000000000000090010 /* ScannerBehaviorTests.swift in Sources */,
+				000000000000000000090012 /* NativeScannerClassifierTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		00000000000000000009000A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 000000000000000000050001 /* FlockView */;
+			targetProxy = 000000000000000000090009 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		000000000000000000070001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		000000000000000000070002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		000000000000000000070003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = FlockView;
+				INFOPLIST_KEY_CFBundleIconName = AppIcon;
+				INFOPLIST_KEY_CFBundleName = FlockView;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "FlockView uses Bluetooth to scan nearby BLE advertisements when Mac Scanner mode is enabled.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "FlockView uses Bluetooth to scan nearby BLE advertisements when Mac Scanner mode is enabled.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "FlockView uses location permission only so macOS can return Wi-Fi SSIDs and BSSIDs during Mac Scanner scans.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kanaan.flockview;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		000000000000000000070004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_PREVIEWS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = FlockView;
+				INFOPLIST_KEY_CFBundleIconName = AppIcon;
+				INFOPLIST_KEY_CFBundleName = FlockView;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "FlockView uses Bluetooth to scan nearby BLE advertisements when Mac Scanner mode is enabled.";
+				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "FlockView uses Bluetooth to scan nearby BLE advertisements when Mac Scanner mode is enabled.";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "FlockView uses location permission only so macOS can return Wi-Fi SSIDs and BSSIDs during Mac Scanner scans.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kanaan.flockview;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		00000000000000000009000B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = FlockViewTests;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kanaan.flockview.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlockView.app/Contents/MacOS/FlockView";
+			};
+			name = Debug;
+		};
+		00000000000000000009000C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = FlockViewTests;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kanaan.flockview.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlockView.app/Contents/MacOS/FlockView";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		000000000000000000080001 /* Build configuration list for PBXProject "FlockView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000000000000000000070001 /* Debug */,
+				000000000000000000070002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		000000000000000000080002 /* Build configuration list for PBXNativeTarget "FlockView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				000000000000000000070003 /* Debug */,
+				000000000000000000070004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		00000000000000000009000D /* Build configuration list for PBXNativeTarget "FlockViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00000000000000000009000B /* Debug */,
+				00000000000000000009000C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 000000000000000000060001 /* Project object */;
+}

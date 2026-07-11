@@ -1,0 +1,13 @@
+.DS_Store
+build/
+DerivedData/
+*.xcuserdata/
+*.xcuserstate
+.swiftpm/
+.venv/
+*.zip
+Screenshot-*.png
+FlockViewScanner/.venv/
+FlockView_Flipper/.venv/
+FlockView_Flipper/dist/
+FlockView_Flipper/.vscode/compile_commands.json
