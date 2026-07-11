@@ -48,7 +48,7 @@ final class ScannerViewModel: ObservableObject {
     private let settings: AppSettings
     private let exportService: ExportService
     private let clipboardService: ClipboardService
-    private let hardwareTransport = SerialScannerTransport()
+    private var hardwareTransport = SerialScannerTransport()
     private let nativeMacTransport = NativeMacScannerTransport()
     private lazy var mockTransport = MockScannerTransport(settings: settings)
     private lazy var recordedTransport = RecordedScannerTransport()
@@ -227,6 +227,9 @@ final class ScannerViewModel: ObservableObject {
 
         switch source {
         case .hardware:
+            if previousTransport !== hardwareTransport {
+                hardwareTransport = SerialScannerTransport()
+            }
             transport = hardwareTransport
             acceptsLiveDetections = false
             status = .disconnected
@@ -622,6 +625,9 @@ final class ScannerViewModel: ObservableObject {
         settings.scannerSource = .hardware
         sessionSource = .hardware
         clearSessionLocally()
+        if previousTransport !== hardwareTransport {
+            hardwareTransport = SerialScannerTransport()
+        }
         transport = hardwareTransport
         status = .disconnected
         connectionState = .disconnected
