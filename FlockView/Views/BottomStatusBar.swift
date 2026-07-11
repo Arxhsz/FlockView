@@ -53,18 +53,6 @@ struct BottomStatusBar: View {
 
             Spacer(minLength: 12)
 
-            Link(destination: URL(string: "https://github.com/Arxhsz")!) {
-                Label("Made by arxhsz", systemImage: "chevron.left.forwardslash.chevron.right")
-                    .font(.callout.weight(.semibold))
-                    .foregroundStyle(FlockTheme.textSecondary)
-                    .lineLimit(1)
-            }
-            .buttonStyle(.plain)
-            .help("Open arxhsz on GitHub")
-            .accessibilityLabel("Made by arxhsz on GitHub")
-
-            DividerLine()
-
             Menu {
                 Button("Export JSON") {
                     Task {

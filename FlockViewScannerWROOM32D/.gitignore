@@ -1,8 +1,0 @@
-.pio/
-.pioenvs/
-build/
-*.elf
-*.bin
-*.map
-*.hex
-*.o

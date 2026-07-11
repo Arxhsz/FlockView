@@ -112,7 +112,7 @@ struct FlockCommands: Commands {
                     options: [
                         .applicationName: "FlockView",
                         .applicationVersion: "1.0.0",
-                        .credits: NSAttributedString(string: "Native SwiftUI scanner console for FlockViewScanner over USB serial, with explicit Test Mode for local verification.")
+                        .credits: NSAttributedString(string: "Native SwiftUI scanner console for FlockViewScanner over USB serial, Mac Scanner, and Test Mode.\n\nMade by arxhsz on GitHub: https://github.com/Arxhsz")
                     ]
                 )
             }

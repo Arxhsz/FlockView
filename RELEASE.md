@@ -1,29 +1,34 @@
-# FlockView Release
+# FlockView v1.0.0
 
-## FlockView v1.0
+FlockView v1.0.0 is the official first release of the native macOS scanner console and ESP32 firmware project.
 
-This release packages the native macOS FlockView app with the maintained ESP32 scanner firmware source and release tooling.
-
-### Included
+## Included
 
 - Native SwiftUI macOS app.
 - Passive ESP32-WROOM-32 scanner firmware in `FlockViewScanner/`.
-- Hardware, Mac Scanner, Test, and Recorded Playback sources.
-- Serial handshake validation before the app reports a scanner as connected.
-- Camera-detection dashboard with proximity, confidence, notes, exports, diagnostics, and notifications.
-- Local JSON and CSV export.
-- Screenshots captured from the actual macOS application.
+- Hardware Mode for the ESP32 scanner firmware.
+- Mac Scanner mode using CoreWLAN and CoreBluetooth.
+- Test Mode with local synthetic detections for demos and validation.
+- Serial handshake validation before the app shows a hardware scanner as connected.
+- Camera detection dashboard with proximity, confidence, notes, exports, diagnostics, and notifications.
 - Multi-signal vendor and signature matching with confidence scoring.
+- Local JSON and CSV export.
+- README screenshots captured from the actual running app in Test Mode.
+- PNG app logo copied from the app asset catalog.
 
-### Passive Scanning Model
+## Passive Scanning Model
 
 FlockView passively observes wireless advertisements and scanner observations. It does not connect to, interfere with, impersonate, jam, or modify detected devices.
 
 Vendor identification may use public/static OUI data, advertised names, manufacturer identifiers, service UUIDs, signal behavior, and repeated observations. Randomized or private addresses can limit identification accuracy, and a vendor match alone does not guarantee that a device is a Flock Safety camera.
 
-### Installer
+## Installer
 
-Build the release package locally:
+Download `FlockView-macOS.dmg`, open it, then drag `FlockView.app` into `Applications`.
+
+The ZIP asset is included as a plain app bundle archive for users who prefer a direct download.
+
+## Build The Installer Locally
 
 ```bash
 chmod +x scripts/package_release.sh
@@ -37,8 +42,6 @@ build/release/FlockView-macOS.dmg
 build/release/FlockView-macOS.zip
 ```
 
-To install from the DMG, open `FlockView-macOS.dmg` and drag `FlockView.app` into `Applications`.
+## Note
 
-### Notes
-
-This is a local development distribution. Sign and notarize the release build with an Apple Developer account before broad distribution outside the developer's own Mac.
+This local build is signed for local development. For broad public distribution outside GitHub source builds, sign and notarize the app with an Apple Developer account.

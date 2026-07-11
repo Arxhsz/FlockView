@@ -183,6 +183,23 @@ struct SettingsView: View {
                         }
                     }
                 }
+
+                settingsSection("About") {
+                    HStack {
+                        Label("FlockView 1.0.0", systemImage: "antenna.radiowaves.left.and.right")
+                            .foregroundStyle(FlockTheme.textSecondary)
+
+                        Spacer()
+
+                        Link(destination: URL(string: "https://github.com/Arxhsz")!) {
+                            Label("Made by arxhsz", systemImage: "chevron.left.forwardslash.chevron.right")
+                                .font(.callout.weight(.semibold))
+                        }
+                        .buttonStyle(.borderless)
+                        .help("Open arxhsz on GitHub")
+                        .accessibilityLabel("Made by arxhsz on GitHub")
+                    }
+                }
             }
             .padding(20)
         }

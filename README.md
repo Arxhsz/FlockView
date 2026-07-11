@@ -9,77 +9,93 @@
 |__/      |__/ \______/  \_______/|__/  \__/    \_/    |__/ \_______/ \_____/\___/
 ```
 
+<p align="center">
+  <img src="docs/assets/flockview-logo.png" alt="FlockView app icon" width="128" height="128">
+</p>
+
 # FlockView
 
-FlockView is a native macOS application and ESP32-based passive wireless scanner designed to identify likely Flock Safety camera infrastructure using vendor signatures, signal analysis, repeated observations, and confidence-based matching. The app keeps each scan session local to the Mac running it.
+FlockView is a native macOS scanner console for local Flock camera detection workflows. It can run from the included ESP32 scanner firmware over USB serial, use the Mac's own Wi-Fi and Bluetooth radios, or generate local Test Mode data for demos and UI checks.
 
-No Electron. No browser serial API. No backend. No cloud account.
+The app is built with SwiftUI. It is not Electron, not a web app, and does not need a backend, account, or cloud service.
 
-## FlockView macOS App
+FlockView is designed around passive observation. It does not connect to, interfere with, impersonate, jam, or modify detected devices.
 
-![FlockView macOS scanner dashboard](docs/assets/flockview-main.png)
+![FlockView running in Test Mode](docs/assets/flockview-dashboard-test.png)
 
 ## Features
 
-- Native SwiftUI macOS scanner dashboard.
-- ESP32-WROOM-32 scanner firmware with USB serial communication.
-- Hardware, Mac Scanner, Test, and Recorded Playback sources.
-- Wi-Fi and BLE observation processing.
-- Vendor and signature matching using multiple indicators.
+- Native macOS SwiftUI interface with a dark, production-ready scanner dashboard.
+- Hardware Mode for the included `FlockViewScanner` ESP32-WROOM-32 firmware.
+- Mac Scanner mode using CoreWLAN and CoreBluetooth.
+- Test Mode with realistic local synthetic detections for demos, screenshots, and UI verification.
+- Live detection list with camera type, protocol, channel, MAC address, proximity, RSSI, and last-seen timing.
+- Detail inspector with device metadata, signal strength, RSSI history, first/last seen times, and observation counts.
+- Multi-signal vendor and signature matching with confidence scoring.
+- Flock signature matching shared between the ESP32 path and native Mac scanner where the platform exposes the needed data.
 - RSSI smoothing, peak and average signal tracking, proximity labels, and trend analysis.
-- Detection confidence scoring and method aggregation.
-- Native macOS notifications and in-app detection sounds.
+- Notes and marked-camera state on detections.
+- Search, sorting, compact rows, and active-session counters.
+- Native macOS notifications for new detections, including grouped alerts and app sound controls.
 - JSON and CSV session exports.
-- Diagnostics for scanner health, malformed input, command timeouts, dropped observations, and queue depth.
+- Scanner diagnostics with connection state, firmware version, board, counters, malformed lines, queue state, dropped observations, recent events, and control commands.
+- Local-first behavior: detections are not uploaded, synced, or sent to a hosted API.
 
-## How FlockView Works
+## Screenshots
 
-FlockView accepts observations from the included ESP32 scanner or from supported native macOS scanning APIs. Observations are normalized, classified, grouped into device records, and displayed only when they meet the configured matching criteria.
+| Test Mode Dashboard | Test Mode Settings | Diagnostics |
+| --- | --- | --- |
+| ![FlockView Test Mode dashboard](docs/assets/flockview-dashboard-test.png) | ![FlockView Test Mode settings](docs/assets/flockview-settings-test-mode.png) | ![FlockView diagnostics](docs/assets/flockview-diagnostics-test-mode.png) |
 
-The project is designed around passive observation. FlockView does not connect to, interfere with, impersonate, jam, or modify detected devices.
+## Scanner Modes
 
-## ESP32 Scanner
+### Hardware Mode
 
-The maintained firmware is located in `FlockViewScanner/`. It communicates with the macOS app over USB serial at `115200` baud and emits structured JSON Lines events for boot state, scanner status, detections, command responses, and errors.
+Hardware Mode connects to an ESP32-WROOM-32 running the included `FlockViewScanner` firmware. This is the best option for real scanning because the dedicated firmware can observe passive radio metadata continuously and generally provides better range and detection coverage than the Mac-only scanner.
 
-Supported operating modes:
+On launch, FlockView discovers serial devices, prefers `/dev/cu.*` ports, waits for serial stabilization, sends `PING`, validates a firmware response, requests `STATUS`, applies the configured scan mode, and starts only when the UI scan state is active.
 
-- Dual Wi-Fi and BLE scanning
-- Wi-Fi-only scanning
-- BLE-only scanning
-- Stopped/idle state
+### Mac Scanner Mode
+
+Mac Scanner mode uses the Mac's local radios:
+
+- CoreWLAN for visible Wi-Fi networks, BSSIDs, SSIDs, channels, and RSSI.
+- CoreBluetooth for BLE advertisement names, manufacturer IDs, service UUIDs, and RSSI.
+
+Mac Scanner mode is useful when you do not have the ESP32 connected, but macOS public APIs do not expose every low-level radio field. In particular, CoreBluetooth does not expose BLE MAC addresses, so BLE OUI matching is only available on scanner sources that expose BLE MACs, such as the ESP32 firmware.
+
+### Test Mode
+
+Test Mode generates local synthetic detections and clearly labels the session as `TEST DATA`. It is intended for demos, UI validation, screenshots, notification checks, and export testing. It does not pretend to be live hardware data.
+
+Test Mode includes:
+
+- Single-camera or multi-camera batch generation.
+- Configurable detection interval.
+- RSSI changes over time.
+- Mixed BLE and Wi-Fi examples.
+- Real dashboard, detail, notification, diagnostic, and export paths.
 
 ## Detection and Vendor Matching
 
 FlockView does not treat a single OUI or vendor match as definitive proof. It combines available evidence such as:
 
-- Vendor and OUI matches for public/static addresses
-- Advertised device names
-- Manufacturer identifiers
-- Service UUIDs
-- Signal strength and RSSI trends
-- Repeated observations
-- Detection method aggregation
-- Confidence scoring
+- Vendor and OUI matches for public/static addresses.
+- Advertised device names.
+- Manufacturer identifiers.
+- Service UUIDs.
+- Signal strength and RSSI trends.
+- Repeated observations.
+- Detection method aggregation.
+- Confidence scoring.
 
 Randomized or private wireless addresses can limit vendor-identification accuracy. A vendor match alone does not guarantee that a device is a Flock Safety camera. FlockView combines multiple indicators to produce a confidence score.
 
-macOS does not expose BLE MAC addresses through public CoreBluetooth APIs. Native BLE matching therefore relies on advertisement name, manufacturer data, service UUIDs, and RSSI evidence instead of BLE OUI matching.
+## Install
 
-## Requirements
+Download the official v1.0 release from [GitHub Releases](https://github.com/Arxhsz/FlockView/releases/tag/v1.0.0).
 
-- macOS 14 Sonoma or newer
-- Xcode with Swift 5.10 or newer
-- ESP32-WROOM-32 for Hardware Mode
-- USB data cable
-- Appropriate USB-UART driver if macOS does not already include one
-- PlatformIO for firmware builds
-
-Mac Scanner mode can run without the ESP32, but macOS may request Bluetooth and Location permission. Location permission is required because macOS gates Wi-Fi SSID and BSSID scan results behind it.
-
-## Installation
-
-The release package is a normal macOS `.dmg`. Open it and drag `FlockView.app` into `Applications`.
+Open `FlockView-macOS.dmg`, then drag `FlockView.app` into `Applications`.
 
 To create the release package locally:
 
@@ -95,7 +111,14 @@ build/release/FlockView-macOS.dmg
 build/release/FlockView-macOS.zip
 ```
 
-## Building the macOS App
+## Requirements
+
+- macOS 14 Sonoma or newer.
+- Xcode with Swift 5.10 or newer for local builds.
+- PlatformIO for firmware builds.
+- ESP32-WROOM-32, USB data cable, and any USB-UART driver required by your board for Hardware Mode.
+
+## Build The macOS App
 
 Open `FlockView.xcodeproj` in Xcode, select the `FlockView` scheme, and run the macOS app target.
 
@@ -111,9 +134,9 @@ Command-line tests:
 xcodebuild test -project FlockView.xcodeproj -scheme FlockView -configuration Debug -destination 'platform=macOS'
 ```
 
-## Building the ESP32 Firmware
+## Build And Flash Firmware
 
-From `FlockViewScanner/`:
+Install PlatformIO, then from `FlockViewScanner/`:
 
 ```bash
 pio run
@@ -122,19 +145,13 @@ pio device monitor
 pio test
 ```
 
-Before connecting from the app, verify that the board emits JSON Lines in PlatformIO Serial Monitor at `115200` baud. A valid boot line includes:
+Before connecting from the app, verify the board prints JSON Lines in PlatformIO Serial Monitor at `115200` baud. A valid boot line includes:
 
 ```json
 {"firmware":"FlockViewScanner"}
 ```
 
-## Usage
-
-Hardware Mode discovers serial devices, prefers `/dev/cu.*` ports, waits for serial stabilization, sends `PING`, validates the firmware response, requests `STATUS`, applies the selected scan mode, and begins scanning only when the UI scan state is active.
-
-Mac Scanner mode uses CoreWLAN for visible Wi-Fi networks and CoreBluetooth for BLE advertisements. Test Mode generates clearly labeled synthetic detections for UI verification. Recorded Playback replays bundled scanner fixtures for development.
-
-Supported firmware commands:
+## Supported Firmware Commands
 
 ```text
 PING
@@ -152,37 +169,41 @@ SET DEBUG ON
 SET DEBUG OFF
 ```
 
-## Project Structure
+Each command ends with `\n` and expects a JSON `command_response`.
+
+## Data And Privacy
+
+FlockView is designed as a local scanner console. It does not upload detections, phone home, create accounts, or depend on a hosted API. Session exports are written only when you explicitly export them.
+
+The app displays matched camera detections. Generic BLE beacons, unrelated access points, unclassified observations, scanner status events, and malformed JSON are intentionally not shown as cameras.
+
+## Troubleshooting
+
+### ESP32 Does Not Appear
+
+Use a data-capable USB cable and check for `/dev/cu.*` devices. Common USB-UART names include `cu.SLAB_USBtoUART`, `cu.usbserial-*`, `cu.wchusbserial*`, and `cu.usbmodem*`.
+
+### Port Opens But Handshake Fails
+
+Confirm the firmware is flashed, open PlatformIO Serial Monitor at `115200`, and check that the boot event reports `FlockViewScanner`. Close any other serial monitor before connecting from FlockView.
+
+### No Detections Appear
+
+The app only displays supported Flock camera matches. RSSI is a proximity indicator, not an exact distance, and detections depend on what the scanner source can legally observe.
+
+### App Reconnects Repeatedly
+
+Disable Auto-Reconnect from the ESP32 menu or Settings, unplug and reconnect the board, then connect manually. Diagnostics will show command timeouts, malformed line counts, and recent scanner events.
+
+## Project Layout
 
 ```text
-FlockView/
-├── FlockView/          # Native macOS Swift application
-├── FlockViewScanner/   # Maintained ESP32 scanner firmware
-├── FlockViewTests/     # XCTest coverage
-├── docs/
-│   └── assets/         # macOS application screenshot
-├── scripts/            # Release packaging tools
-├── README.md
-└── RELEASE.md
+FlockView/         macOS SwiftUI app
+FlockViewScanner/  ESP32 PlatformIO firmware
+FlockViewTests/    XCTest coverage
+docs/assets/       README images from the real running app
+scripts/           Release packaging tools
 ```
-
-## Privacy and Responsible Use
-
-FlockView keeps scanner sessions local. It does not upload detections, create accounts, phone home, or depend on a hosted API. Session exports are created only when the user explicitly requests them.
-
-Use FlockView only where passive observation is lawful and authorized. RSSI is a proximity indicator, not an exact distance measurement, and classification results should be treated as confidence-based estimates rather than definitive identification.
-
-## Known Limitations
-
-- Randomized BLE addresses may prevent OUI-based vendor identification.
-- macOS CoreBluetooth does not expose BLE MAC addresses.
-- Signal strength varies with antenna orientation, obstructions, radio conditions, and hardware.
-- A matching vendor or signature is not by itself proof of device identity.
-- Detection quality depends on the evidence available to the selected scanner source.
-
-## Release Information
-
-See [RELEASE.md](RELEASE.md) for the current release summary and packaging instructions.
 
 ## Author
 
